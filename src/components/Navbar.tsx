@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Menu, X, ArrowRight, Sparkles } from 'lucide-react'
+import { Menu, X, ArrowRight, Bot, Sparkles } from 'lucide-react'
 import { navItems, profile, sectionIds } from '../data/profile'
 import { useActiveSection } from '../hooks/useActiveSection'
 import { DownloadResumeButton } from './ui/DownloadResumeButton'
@@ -96,6 +96,14 @@ export function Navbar() {
 
         {/* Right CTA Actions */}
         <div className="hidden items-center gap-3 lg:flex">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('open-sarbhas-bot'))}
+            className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/50 bg-cyan-950/40 px-3.5 py-2 text-xs font-semibold text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all hover:bg-cyan-500/20 hover:border-cyan-300 active:scale-95 cursor-pointer"
+          >
+            <Bot className="h-4 w-4 text-cyan-400 animate-pulse" />
+            <span>AI Bot</span>
+          </button>
           <DownloadResumeButton variant="outline" className="py-2! px-4! text-xs! font-medium rounded-full!" />
           <a
             href="#contact"
@@ -149,6 +157,17 @@ export function Navbar() {
           </ul>
 
           <div className="mt-6 flex flex-col gap-3 border-t border-line pt-5">
+            <button
+              type="button"
+              onClick={() => {
+                close()
+                window.dispatchEvent(new CustomEvent('open-sarbhas-bot'))
+              }}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-cyan-400 bg-cyan-950/60 px-5 py-3 text-sm font-semibold text-cyan-200 shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all hover:bg-cyan-500/20"
+            >
+              <Bot className="h-5 w-5 text-cyan-400 animate-pulse" />
+              <span>Ask Sarbhas-Bot (AI 3D)</span>
+            </button>
             <DownloadResumeButton className="w-full justify-center" />
             <a
               href="#contact"

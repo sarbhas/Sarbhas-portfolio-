@@ -5,6 +5,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  Bot,
 } from 'lucide-react'
 import { profile } from '../data/profile'
 import { Avatar } from './ui/Avatar'
@@ -106,6 +107,17 @@ export function Hero() {
                     <ArrowUpRight className="h-4 w-4" />
                   </span>
                 </MagneticButton>
+
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent('open-sarbhas-bot'))}
+                  className="rounded-full border-2 border-cyan-400 bg-cyan-950/50 px-6 py-3.5 text-sm font-semibold text-cyan-200 shadow-[0_0_25px_rgba(6,182,212,0.4)] backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:bg-cyan-500/20 hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] cursor-pointer"
+                >
+                  <span className="flex items-center gap-2">
+                    <Bot className="h-4 w-4 text-cyan-400 animate-pulse" />
+                    Ask Sarbhas-Bot (AI 3D)
+                  </span>
+                </button>
 
                 <DownloadResumeButton variant="outline" className="px-6 py-3.5 rounded-full!" />
 

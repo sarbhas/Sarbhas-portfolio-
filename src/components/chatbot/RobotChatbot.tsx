@@ -52,6 +52,16 @@ export function RobotChatbot() {
     }
   }, [messages, isOpen, isMinimized, isTyping])
 
+  // Listen for open event from Navbar, Hero, or any other button
+  useEffect(() => {
+    const handleOpen = () => {
+      setIsOpen(true)
+      setIsMinimized(false)
+    }
+    window.addEventListener('open-sarbhas-bot', handleOpen)
+    return () => window.removeEventListener('open-sarbhas-bot', handleOpen)
+  }, [])
+
   // Focus input when opening chat
   useEffect(() => {
     if (isOpen && !isMinimized) {
@@ -121,39 +131,37 @@ export function RobotChatbot() {
       {/* ------------------------------------------------------------- */}
       {/* 1. FLOATING LAUNCHER BUTTON                                   */}
       {/* ------------------------------------------------------------- */}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2 print:hidden">
+      <div className="fixed bottom-5 right-5 z-[9999] flex flex-col items-end gap-2 print:hidden pointer-events-auto">
         {!isOpen && (
           <div className="group relative flex items-center">
-            {/* Tooltip speech bubble */}
-            <div className="mr-3 hidden items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-navy/95 px-3 py-1.5 text-xs font-medium text-cloud shadow-xl backdrop-blur-md transition-all sm:flex group-hover:scale-105">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
-              </span>
-              <span>Ask about Mohammed Sarbhas!</span>
-            </div>
-
-            {/* Pulsing button */}
+            {/* Pulsing high-visibility button */}
             <button
               onClick={() => {
                 setIsOpen(true)
                 setIsMinimized(false)
               }}
               aria-label="Open Sarbhas-Bot 3D Chatbot"
-              className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/40 bg-gradient-to-br from-navy via-surface-2 to-cyan-950 text-cyan-300 shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all duration-300 hover:scale-110 hover:border-cyan-300 hover:shadow-[0_0_35px_rgba(6,182,212,0.5)] active:scale-95 focus-visible:outline-2 focus-visible:outline-cyan-400"
+              className="relative flex items-center gap-2.5 rounded-full border-2 border-cyan-400 bg-gradient-to-r from-navy via-surface-2 to-cyan-950 px-4 py-3 text-cyan-200 shadow-[0_0_30px_rgba(6,182,212,0.6),0_10px_25px_rgba(0,0,0,0.8)] transition-all duration-300 hover:scale-105 hover:border-cyan-300 hover:shadow-[0_0_40px_rgba(6,182,212,0.8)] active:scale-95 focus-visible:outline-2 focus-visible:outline-cyan-400"
             >
-              {/* Animated outer ring */}
-              <span className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-500 via-brand-2 to-violet-500 opacity-30 blur-sm animate-pulse-glow" />
+              {/* Outer pulsing laser glow */}
+              <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-cyan-400 opacity-60 blur-md animate-pulse-glow" />
 
-              <Bot className="relative h-7 w-7 transition-transform group-hover:rotate-6 text-cyan-200" />
+              <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/50">
+                <Bot className="h-5 w-5 animate-pulse" />
+              </span>
+
+              <div className="relative flex flex-col items-start pr-1 text-left">
+                <span className="flex items-center gap-1.5 text-xs font-bold text-white tracking-wide">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                  Ask Sarbhas-Bot
+                </span>
+                <span className="text-[10px] font-mono text-cyan-300/80">3D AI Assistant</span>
+              </div>
 
               {/* Unread indicator */}
               {hasUnread && (
-                <span className="absolute -top-1 -right-1 flex h-4 w-4">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-80" />
-                  <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-ink bg-cyan-400 text-[9px] font-bold text-ink items-center justify-center">
-                    !
-                  </span>
+                <span className="relative flex h-5 w-5 items-center justify-center rounded-full bg-cyan-400 text-[10px] font-extrabold text-ink shadow-[0_0_10px_#22d3ee]">
+                  1
                 </span>
               )}
             </button>
@@ -168,7 +176,7 @@ export function RobotChatbot() {
         <div
           role="dialog"
           aria-label="Mohammed Sarbhas AI Assistant Chatbot"
-          className={`fixed z-50 transition-all duration-300 print:hidden ${
+          className={`fixed z-[9999] transition-all duration-300 print:hidden ${
             isMinimized
               ? 'bottom-5 right-5 w-80'
               : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[calc(100vw-32px)] sm:w-[460px] md:w-[480px] max-w-[480px] h-[640px] max-h-[calc(100vh-32px)]'
