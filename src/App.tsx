@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar'
 import { Projects } from './components/Projects'
 import { Skills } from './components/Skills'
 import { TechBackground } from './components/ui/TechBackground'
+import { RobotChatbot } from './components/chatbot/RobotChatbot'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 
 export default function App() {
@@ -40,6 +41,9 @@ export default function App() {
       </main>
 
       <Footer />
+
+      {/* Interactive 3D Spline Robot Chatbot */}
+      <RobotChatbot />
     </div>
   )
 }
