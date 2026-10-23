@@ -83,7 +83,7 @@ export const profile = {
 
   /** Leave '' until the real profile exists — buttons stay disabled. */
   githubUrl: '',
-  linkedinUrl: '',
+  linkedinUrl: 'https://www.linkedin.com/in/mohammed-sarbhas-403136405',
 
   hero: {
     greeting: "Hi, I'm Mohammed Sarbhas",

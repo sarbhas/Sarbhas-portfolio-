@@ -362,18 +362,22 @@ ${vsProj.description}
     query.includes('reach') ||
     query.includes('hire') ||
     query.includes('message') ||
-    query.includes('get in touch')
+    query.includes('get in touch') ||
+    query.includes('linkedin') ||
+    query.includes('social')
   ) {
     return {
       text: `You can reach out directly to Mohammed Sarbhas through:
 
+- 💼 **LinkedIn:** [linkedin.com/in/mohammed-sarbhas-403136405](${profile.linkedinUrl})
 - 📧 **Email:** [${profile.email}](mailto:${profile.email})
 - 📱 **Phone:** [${profile.phoneHref}](tel:${profile.phoneHref}) (${profile.phone})
 - 📍 **Location:** ${profile.location}
 
 Mohammed is always open to collaborative projects, internships, and opportunities in AI/ML and software engineering.`,
-      tags: [profile.email, profile.location],
+      tags: ['LinkedIn', profile.email, profile.location],
       links: [
+        { label: 'Open LinkedIn Profile', href: profile.linkedinUrl },
         { label: 'Send an Email', href: `mailto:${profile.email}` },
         { label: 'Go to Contact Form', href: '#contact' },
       ],
