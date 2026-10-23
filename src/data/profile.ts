@@ -40,6 +40,7 @@ export interface Project {
   id: string
   title: string
   duration?: string
+  status?: string
   description: string
   bulletsTitle: string
   bullets: string[]
@@ -155,32 +156,36 @@ export const projects: Project[] = [
   {
     id: 'sign-language',
     title: 'Sign Language Video Communication System',
-    duration: 'September 2026 – Present',
+    duration: 'Sep 2026 – Present',
+    status: 'In Development (Started Sep 2026)',
     description:
-      'A video communication project designed to support communication between people using sign language and other users.',
-    bulletsTitle: 'Objectives',
+      'An intelligent real-time communication platform utilizing computer vision and deep learning to translate sign language gestures into natural language streams during live video calls.',
+    bulletsTitle: 'Key Objectives & Milestones',
     bullets: [
-      'Develop a video communication platform.',
-      'Explore AI/ML-based sign language recognition.',
-      'Help make communication more accessible.',
+      'Real-time 21-point 3D hand landmark extraction using MediaPipe & OpenCV.',
+      'Temporal gesture classification network using PyTorch LSTM & CNN architectures.',
+      'Low-latency WebRTC video peer streaming with synchronized translation captions.',
+      'Building an inclusive communication bridge for the hearing and speech impaired community.',
     ],
-    tags: ['Python', 'Computer Vision', 'OpenCV', 'Deep Learning', 'Video Streaming'],
+    tags: ['Python', 'Computer Vision', 'OpenCV', 'MediaPipe', 'PyTorch', 'WebRTC', 'FastAPI'],
     liveUrl: '',
     repoUrl: '',
   },
   {
     id: 'vehicle-service',
     title: 'Vehicle Service Management System',
+    duration: 'Completed Project',
+    status: 'Completed (Production Ready)',
     description:
-      'An application designed to make vehicle servicing more convenient by allowing users to book service appointments online.',
-    bulletsTitle: 'Features',
+      'A robust, end-to-end full-stack vehicle service and appointment scheduling system featuring automated slot allocation, customer job tracking, service catalog selection, and technician assignment.',
+    bulletsTitle: 'Shipped Features & Capabilities',
     bullets: [
-      'Vehicle information management.',
-      'Service selection.',
-      'Appointment booking.',
-      'Service management.',
+      'Comprehensive customer vehicle registry with digital service history logs.',
+      'Interactive tiered service catalog (Maintenance, Oil & Filters, Brake & Suspension).',
+      'Real-time appointment slot booking with conflict detection and automated scheduling.',
+      'End-to-end service job lifecycle tracker (Inspection ➔ In Service ➔ QC ➔ Delivery).',
     ],
-    tags: ['Java', 'SQL', 'Database Management', 'Object-Oriented Design', 'Web Application'],
+    tags: ['Java', 'SQL', 'PostgreSQL', 'Object-Oriented Design', 'REST APIs', 'Web Application'],
     liveUrl: '',
     repoUrl: '',
   },

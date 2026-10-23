@@ -190,17 +190,17 @@ export function TechBackground() {
   }, [])
 
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {/* Deep atmospheric luminous mesh orbs */}
-      <span className="animate-float-slow absolute -top-32 -left-28 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-brand/25 via-cyan-500/15 to-transparent blur-[120px]" />
-      <span className="animate-float-slower absolute top-1/4 -right-36 h-[34rem] w-[34rem] rounded-full bg-gradient-to-bl from-violet/25 via-brand-2/15 to-transparent blur-[140px]" />
-      <span className="animate-float-slow absolute -bottom-36 left-1/4 h-[30rem] w-[30rem] rounded-full bg-cyan-500/15 blur-[130px]" />
+      <span className="animate-float-slow absolute -top-32 -left-28 h-[36rem] w-[36rem] rounded-full bg-gradient-to-br from-brand/20 via-cyan-500/15 to-transparent blur-[130px]" />
+      <span className="animate-float-slower absolute top-1/3 -right-36 h-[38rem] w-[38rem] rounded-full bg-gradient-to-bl from-violet/20 via-brand-2/15 to-transparent blur-[150px]" />
+      <span className="animate-float-slow absolute -bottom-36 left-1/3 h-[34rem] w-[34rem] rounded-full bg-cyan-500/15 blur-[140px]" />
 
       {/* Modern subtle technical grid */}
-      <span className="tech-grid absolute inset-0 opacity-80" />
+      <span className="tech-grid absolute inset-0 opacity-70" />
 
       {/* Interactive Neural Field Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-80" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-85" />
     </div>
   )
 }

@@ -11,7 +11,6 @@ import { Avatar } from './ui/Avatar'
 import { DownloadResumeButton } from './ui/DownloadResumeButton'
 import { MagneticButton } from './ui/MagneticButton'
 import { Reveal } from './ui/Reveal'
-import { TechBackground } from './ui/TechBackground'
 
 const ROLES = [
   'AI & Machine Learning Engineering Student',
@@ -47,8 +46,6 @@ export function Hero() {
       aria-labelledby="home-heading"
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16 sm:pt-36"
     >
-      <TechBackground />
-
       <div className="relative z-10 mx-auto w-full max-w-6xl px-5 sm:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
           {/* ---------------------------------------------------------- Copy */}

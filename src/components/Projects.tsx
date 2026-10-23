@@ -2,10 +2,10 @@ import { useState } from 'react'
 import {
   ArrowUpRight,
   CheckCircle2,
-  Clock3,
   Code2,
   Cpu,
   Github,
+  Play,
   Sparkles,
   Terminal,
 } from 'lucide-react'
@@ -13,47 +13,58 @@ import { projects, type Project } from '../data/profile'
 import { MagneticButton } from './ui/MagneticButton'
 import { Reveal } from './ui/Reveal'
 import { Section } from './ui/Section'
+import { SignLanguageSimulator } from './ui/SignLanguageSimulator'
 import { TiltCard } from './ui/TiltCard'
+import { VehicleServiceSimulator } from './ui/VehicleServiceSimulator'
 
 // Technical architecture breakdowns for anti-vibe engineering depth
 const ARCHITECTURES: Record<string, string[]> = {
   'sign-language': [
-    'Video Stream Capture (OpenCV / MediaPipe landmark detector)',
-    'Real-time Spatial Feature Extraction (21 3D Hand Coordinates)',
-    'Temporal Classification (LSTM / CNN gesture recognition)',
-    'Low-Latency Video Pipeline with WebRTC communication',
+    'Video Stream Capture (OpenCV / MediaPipe 3D Landmark Detector)',
+    'Real-time Spatial Feature Extraction (21 Hand Coordinate Joints)',
+    'Temporal Classification (LSTM / CNN gesture recognition network)',
+    'Low-Latency Video Pipeline with WebRTC communication stream',
   ],
   'vehicle-service': [
     'Layered Client-Server Architecture (Java Backend + Relational DB)',
     'Service Booking & Customer State Management Flow',
     'PostgreSQL Normalized Schema (Vehicles, Appointments, Services)',
-    'Automated Service Scheduling & Availability Resolver',
+    'Automated Workshop Bay Scheduling & Technician Dispatch Resolver',
   ],
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const [activeTab, setActiveTab] = useState<'overview' | 'architecture'>('overview')
+  const [activeTab, setActiveTab] = useState<'demo' | 'pipeline' | 'overview'>('demo')
   const architecture = ARCHITECTURES[project.id] || []
+  const isSignLanguage = project.id === 'sign-language'
+  const isCompleted = project.id === 'vehicle-service'
 
   return (
     <Reveal delay={index * 140}>
       <TiltCard className="flex h-full flex-col overflow-hidden border border-white/10 hover:border-cyan-400/40">
         {/* Top Header Banner */}
         <div className="relative border-b border-white/10 bg-gradient-to-br from-brand/20 via-cyan-500/10 to-violet/20 p-6 sm:p-7">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
                   Project 0{index + 1}
                 </span>
-                {project.duration && (
-                  <span className="inline-flex items-center gap-1 rounded-full border border-cyan-400/30 bg-cyan-950/40 px-2.5 py-0.5 font-mono text-[11px] text-cyan-300">
-                    <Clock3 className="h-3 w-3" />
-                    {project.duration}
+
+                {isSignLanguage ? (
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-cyan-950/40 px-3 py-0.5 font-mono text-[11px] font-semibold text-cyan-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping" />
+                    In Development • Started Sep 2026
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-950/40 px-3 py-0.5 font-mono text-[11px] font-semibold text-emerald-300">
+                    <CheckCircle2 className="h-3 w-3 text-emerald-400" />
+                    Completed Project
                   </span>
                 )}
               </div>
-              <h3 className="mt-3 text-2xl font-bold tracking-tight text-cloud sm:text-3xl">
+
+              <h3 className="text-2xl font-bold tracking-tight text-cloud sm:text-3xl">
                 {project.title}
               </h3>
             </div>
@@ -66,53 +77,62 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </span>
           </div>
 
-          {/* Interactive Mode Toggle */}
-          <div className="mt-6 flex items-center gap-2">
+          {/* Interactive Mode Toggle Pills */}
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setActiveTab('demo')}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-xs font-semibold transition-all ${
+                activeTab === 'demo'
+                  ? 'bg-gradient-to-r from-brand to-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)] border border-cyan-400/50'
+                  : 'text-mist hover:text-cloud hover:bg-white/5 border border-transparent'
+              }`}
+            >
+              <Play className="h-3 w-3 fill-current" />
+              Live Interactive Demo
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('pipeline')}
+              className={`rounded-lg px-3 py-1.5 font-mono text-xs font-medium transition-all ${
+                activeTab === 'pipeline'
+                  ? 'bg-cyan-500/20 text-cyan-200 border border-cyan-400/40'
+                  : 'text-mist hover:text-cloud hover:bg-white/5 border border-transparent'
+              }`}
+            >
+              System Pipeline
+            </button>
             <button
               type="button"
               onClick={() => setActiveTab('overview')}
               className={`rounded-lg px-3 py-1.5 font-mono text-xs font-medium transition-all ${
                 activeTab === 'overview'
                   ? 'bg-cyan-500/20 text-cyan-200 border border-cyan-400/40'
-                  : 'text-mist hover:text-cloud hover:bg-white/5'
+                  : 'text-mist hover:text-cloud hover:bg-white/5 border border-transparent'
               }`}
             >
-              Overview
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab('architecture')}
-              className={`rounded-lg px-3 py-1.5 font-mono text-xs font-medium transition-all ${
-                activeTab === 'architecture'
-                  ? 'bg-cyan-500/20 text-cyan-200 border border-cyan-400/40'
-                  : 'text-mist hover:text-cloud hover:bg-white/5'
-              }`}
-            >
-              System Pipeline
+              Project Scope
             </button>
           </div>
         </div>
 
         {/* Card Content Area */}
         <div className="flex flex-1 flex-col p-6 sm:p-7">
-          {activeTab === 'overview' ? (
-            <>
-              <p className="text-[15px] leading-relaxed text-mist">{project.description}</p>
+          {activeTab === 'demo' ? (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-mist/80">
+                  {isSignLanguage
+                    ? 'Interactive Real-time Computer Vision & Gesture Recognition Simulation'
+                    : 'Interactive Full-Stack Customer Booking & Workshop Bay Dashboard'}
+                </span>
+                <span className="font-mono text-[11px] text-cyan-300">Live Sample</span>
+              </div>
 
-              <h4 className="mt-6 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-                {project.bulletsTitle}
-              </h4>
-              <ul className="mt-3 space-y-2.5">
-                {project.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2.5 text-sm text-cloud/90">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            <div className="space-y-3">
+              {isSignLanguage ? <SignLanguageSimulator /> : <VehicleServiceSimulator />}
+            </div>
+          ) : activeTab === 'pipeline' ? (
+            <div className="space-y-4">
               <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300 flex items-center gap-2">
                 <Terminal className="h-3.5 w-3.5" />
                 Technical Execution Pipeline
@@ -131,6 +151,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 ))}
               </div>
             </div>
+          ) : (
+            <>
+              <p className="text-[15px] leading-relaxed text-mist">{project.description}</p>
+
+              <h4 className="mt-6 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
+                {project.bulletsTitle}
+              </h4>
+              <ul className="mt-3 space-y-2.5">
+                {project.bullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start gap-2.5 text-sm text-cloud/90">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
 
           {/* Tech Stack Pills */}
@@ -164,10 +200,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </span>
               </MagneticButton>
+            ) : isCompleted ? (
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-950/30 px-4 py-2 text-xs font-mono text-emerald-300">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                Completed &amp; Fully Functional
+              </span>
             ) : (
               <span className="inline-flex items-center gap-2 rounded-full border border-dashed border-cyan-400/30 bg-cyan-950/20 px-4 py-2 text-xs font-mono text-cyan-300/80">
                 <Sparkles className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
-                Under Active Engineering
+                In Active Engineering (Started Sep 2026)
               </span>
             )}
 
